@@ -7,5 +7,6 @@
     "app/api/proxy/route.ts": {
       "maxDuration": 60
     }
-  }
+  },
+  "outputDirectory": ".next"
 } 
