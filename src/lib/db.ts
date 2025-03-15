@@ -63,6 +63,11 @@ export async function getLatestMetrics(): Promise<DashboardData> {
                 value: Number(metrics.revenue) || 0, 
                 label: 'Revenue', 
                 prefix: '$' 
+            },
+            operationalExpenses: {
+                value: Number(metrics.operational_expenses) || 0,
+                label: 'Operational Expenses',
+                prefix: '$'
             }
         },
         charts: {
