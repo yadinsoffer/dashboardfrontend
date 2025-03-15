@@ -18,6 +18,10 @@ export async function getLatestMetrics(): Promise<DashboardData> {
     const metrics = metricsResult.rows[0] || {};
     const dailyMetrics = dailyMetricsResult.rows || [];
 
+    // Debug logging
+    console.log('Raw metrics from database:', metrics);
+    console.log('Operational expenses from database:', metrics.operational_expenses);
+
     return {
         metrics: {
             totalMarketingSpend: { 
