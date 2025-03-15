@@ -18,11 +18,16 @@ export async function getLatestMetrics(): Promise<DashboardData> {
     const metrics = metricsResult.rows[0] || {};
     const dailyMetrics = dailyMetricsResult.rows || [];
 
-    // Debug logging
+    // Enhanced debug logging
+    console.log('=== DATABASE DEBUG ===');
+    console.log('Raw metrics query result:', metricsResult);
     console.log('Raw metrics from database:', metrics);
+    console.log('All metrics fields:', Object.keys(metrics));
     console.log('Operational expenses from database:', metrics.operational_expenses);
-
-    return {
+    console.log('Operational expenses type:', typeof metrics.operational_expenses);
+    
+    // Create the response object
+    const response = {
         metrics: {
             totalMarketingSpend: { 
                 value: Number(metrics.total_marketing_spend) || 0, 
@@ -85,6 +90,13 @@ export async function getLatestMetrics(): Promise<DashboardData> {
             }))
         }
     };
+    
+    // Log the final response
+    console.log('=== RESPONSE DEBUG ===');
+    console.log('Final response metrics:', response.metrics);
+    console.log('Operational expenses in response:', response.metrics.operationalExpenses);
+    
+    return response;
 }
 
 export async function updateMetrics(metrics: Metrics): Promise<void> {
