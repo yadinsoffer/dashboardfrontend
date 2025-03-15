@@ -63,6 +63,11 @@ export async function getLatestMetrics(): Promise<DashboardData> {
                 value: Number(metrics.revenue) || 0, 
                 label: 'Revenue', 
                 prefix: '$' 
+            },
+            operationalExpenses: {
+                value: Number(metrics.operational_expenses) || 0,
+                label: 'Operational Expenses',
+                prefix: '$'
             }
         },
         charts: {
@@ -89,7 +94,8 @@ export async function updateMetrics(metrics: Metrics): Promise<void> {
             customer_lifetime_value,
             customer_acquisition_cost,
             tickets,
-            revenue
+            revenue,
+            operational_expenses
         ) VALUES (
             ${metrics.totalMarketingSpend.value},
             ${metrics.influencerSpend.value},
@@ -99,7 +105,8 @@ export async function updateMetrics(metrics: Metrics): Promise<void> {
             ${metrics.customerLifetimeValue.value},
             ${metrics.customerAcquisitionCost.value},
             ${metrics.tickets.value},
-            ${metrics.revenue.value}
+            ${metrics.revenue.value},
+            ${metrics.operationalExpenses.value}
         )
     `;
 }

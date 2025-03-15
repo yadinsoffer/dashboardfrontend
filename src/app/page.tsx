@@ -21,7 +21,8 @@ export default function Home() {
       customerLifetimeValue: { value: 0, label: 'Customer Lifetime Value', prefix: '$' },
       customerAcquisitionCost: { value: 0, label: 'Customer Acquisition Cost', prefix: '$' },
       tickets: { value: 0, label: 'Tickets' },
-      revenue: { value: 0, label: 'Revenue', prefix: '$' }
+      revenue: { value: 0, label: 'Revenue', prefix: '$' },
+      operationalExpenses: { value: 0, label: 'Operational Expenses', prefix: '$' }
     },
     charts: {
       barChart: [],
