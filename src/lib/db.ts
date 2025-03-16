@@ -70,9 +70,9 @@ export async function getLatestMetrics(): Promise<DashboardData> {
                 prefix: '$'
             },
             yadinExpenses: {
-                value: Number(metricsResult.rows[0]?.total_ads_count) || 0,
+                value: Number(metrics.total_ads_count) || 0,
                 label: 'Yadin Expenses',
-                prefix: ''
+                prefix: '$'
             }
         },
         charts: {
