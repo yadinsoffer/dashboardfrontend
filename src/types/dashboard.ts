@@ -16,6 +16,7 @@ export interface Metrics {
   tickets: MetricValue;
   revenue: MetricValue;
   operationalExpenses: MetricValue;
+  yadinExpenses: MetricValue;
 }
 
 export interface ChartDataPoint {
