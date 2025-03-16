@@ -94,7 +94,8 @@ export async function updateMetrics(metrics: Metrics): Promise<void> {
             customer_lifetime_value,
             customer_acquisition_cost,
             tickets,
-            revenue
+            revenue,
+            operational_expenses
         ) VALUES (
             ${metrics.totalMarketingSpend.value},
             ${metrics.influencerSpend.value},
@@ -104,7 +105,8 @@ export async function updateMetrics(metrics: Metrics): Promise<void> {
             ${metrics.customerLifetimeValue.value},
             ${metrics.customerAcquisitionCost.value},
             ${metrics.tickets.value},
-            ${metrics.revenue.value}
+            ${metrics.revenue.value},
+            ${metrics.operationalExpenses.value}
         )
     `;
 }

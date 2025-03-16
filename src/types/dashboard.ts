@@ -47,4 +47,4 @@ export interface MetricCardProps {
 export interface ChartProps {
   data: ChartDataPoint[];
   className?: string;
-} 
+}
