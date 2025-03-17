@@ -94,6 +94,9 @@ export async function getLatestMetrics(): Promise<DashboardData> {
 }
 
 export async function updateMetrics(metrics: Metrics): Promise<void> {
+    // Add logging to see what values are being received
+    console.log('Updating metrics with:', JSON.stringify(metrics, null, 2));
+    
     await sql`
         INSERT INTO metrics (
             total_marketing_spend,
@@ -109,19 +112,30 @@ export async function updateMetrics(metrics: Metrics): Promise<void> {
             total_ads_count,
             opex
         ) VALUES (
-            ${metrics.totalMarketingSpend.value},
-            ${metrics.influencerSpend.value},
-            ${metrics.paidAdsSpend.value},
-            ${metrics.netRevenue.value},
-            ${metrics.revenueSpentOnAds.value},
-            ${metrics.customerLifetimeValue.value},
-            ${metrics.customerAcquisitionCost.value},
-            ${metrics.tickets.value},
-            ${metrics.revenue.value},
-            ${metrics.operationalExpenses.value},
-            ${metrics.yadinExpenses.value},
-            ${metrics.opEx.value}
+            ${metrics.totalMarketingSpend?.value || 0},
+            ${metrics.influencerSpend?.value || 0},
+            ${metrics.paidAdsSpend?.value || 0},
+            ${metrics.netRevenue?.value || 0},
+            ${metrics.revenueSpentOnAds?.value || 0},
+            ${metrics.customerLifetimeValue?.value || 0},
+            ${metrics.customerAcquisitionCost?.value || 0},
+            ${metrics.tickets?.value || 0},
+            ${metrics.revenue?.value || 0},
+            ${metrics.operationalExpenses?.value || 0},
+            ${metrics.yadinExpenses?.value || 0},
+            ${metrics.opEx?.value || 0}
         )
+        ON CONFLICT (tickets, revenue) DO UPDATE SET
+            total_marketing_spend = EXCLUDED.total_marketing_spend,
+            influencer_spend = EXCLUDED.influencer_spend,
+            paid_ads_spend = EXCLUDED.paid_ads_spend,
+            net_revenue = EXCLUDED.net_revenue,
+            revenue_spent_on_ads = EXCLUDED.revenue_spent_on_ads,
+            customer_lifetime_value = EXCLUDED.customer_lifetime_value,
+            customer_acquisition_cost = EXCLUDED.customer_acquisition_cost,
+            operational_expenses = EXCLUDED.operational_expenses,
+            total_ads_count = EXCLUDED.total_ads_count,
+            opex = EXCLUDED.opex
     `;
 }
 
