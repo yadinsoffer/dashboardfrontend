@@ -23,7 +23,8 @@ export default function Home() {
       tickets: { value: 0, label: 'Tickets' },
       revenue: { value: 0, label: 'Revenue', prefix: '$' },
       operationalExpenses: { value: 0, label: 'Operational Expenses', prefix: '$' },
-      yadinExpenses: { value: 0, label: 'Yadin Expenses', prefix: '' }
+      yadinExpenses: { value: 0, label: 'Yadin Expenses', prefix: '' },
+      opEx: { value: 0, label: 'OpEx', prefix: '$' }
     },
     charts: {
       barChart: [],

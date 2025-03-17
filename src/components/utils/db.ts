@@ -24,6 +24,7 @@ export async function getLatestMetrics(): Promise<DashboardData> {
     console.log('Raw metrics from database:', metrics);
     console.log('All metrics fields:', Object.keys(metrics));
     console.log('Operational expenses from database:', metrics.operational_expenses);
+    console.log('OpEx from database:', metrics.opex);
     console.log('Operational expenses type:', typeof metrics.operational_expenses);
     
     // Create the response object
@@ -82,6 +83,11 @@ export async function getLatestMetrics(): Promise<DashboardData> {
                 value: Number(metrics.total_ads_count) || 0,
                 label: 'Yadin Expenses',
                 prefix: '$'
+            },
+            opEx: {
+                value: Number(metrics.opex) || 0,
+                label: 'OpEx',
+                prefix: '$'
             }
         },
         charts: {
@@ -100,6 +106,7 @@ export async function getLatestMetrics(): Promise<DashboardData> {
     console.log('=== RESPONSE DEBUG ===');
     console.log('Final response metrics:', response.metrics);
     console.log('Operational expenses in response:', response.metrics.operationalExpenses);
+    console.log('OpEx in response:', response.metrics.opEx);
     
     return response;
 }
@@ -117,7 +124,8 @@ export async function updateMetrics(metrics: Metrics): Promise<void> {
             tickets,
             revenue,
             operational_expenses,
-            total_ads_count
+            total_ads_count,
+            opex
         ) VALUES (
             ${metrics.totalMarketingSpend.value},
             ${metrics.influencerSpend.value},
@@ -129,7 +137,8 @@ export async function updateMetrics(metrics: Metrics): Promise<void> {
             ${metrics.tickets.value},
             ${metrics.revenue.value},
             ${metrics.operationalExpenses.value},
-            ${metrics.yadinExpenses.value}
+            ${metrics.yadinExpenses.value},
+            ${metrics.opEx.value}
         )
     `;
 }

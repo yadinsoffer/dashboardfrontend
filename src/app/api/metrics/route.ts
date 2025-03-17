@@ -9,6 +9,7 @@ export async function GET() {
         console.log('=== API ROUTE DEBUG ===');
         console.log('Metrics object from getLatestMetrics:', metrics);
         console.log('Operational expenses in metrics:', metrics.metrics.operationalExpenses);
+        console.log('OpEx in metrics:', metrics.metrics.opEx);
         
         // Ensure operationalExpenses is explicitly included in the response
         const response = {
@@ -22,6 +23,11 @@ export async function GET() {
                 yadinExpenses: metrics.metrics.yadinExpenses || {
                     value: 0,
                     label: 'Yadin Expenses',
+                    prefix: '$'
+                },
+                opEx: metrics.metrics.opEx || {
+                    value: 0,
+                    label: 'OpEx',
                     prefix: '$'
                 }
             },
