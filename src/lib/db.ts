@@ -97,33 +97,6 @@ export async function updateMetrics(metrics: Metrics): Promise<void> {
     // Add logging to see what values are being received
     console.log('Updating metrics with:', JSON.stringify(metrics, null, 2));
     
-    // Add defensive checks to identify which property might be undefined
-    const safeGetValue = (prop: { value?: number } | undefined, defaultVal: number = 0): number => {
-        if (!prop) {
-            console.log('Warning: Property is undefined');
-            return defaultVal;
-        }
-        if (prop.value === undefined) {
-            console.log('Warning: Property value is undefined');
-            return defaultVal;
-        }
-        return prop.value;
-    };
-    
-    // Log each property to identify which one might be causing issues
-    console.log('totalMarketingSpend:', metrics.totalMarketingSpend);
-    console.log('influencerSpend:', metrics.influencerSpend);
-    console.log('paidAdsSpend:', metrics.paidAdsSpend);
-    console.log('netRevenue:', metrics.netRevenue);
-    console.log('revenueSpentOnAds:', metrics.revenueSpentOnAds);
-    console.log('customerLifetimeValue:', metrics.customerLifetimeValue);
-    console.log('customerAcquisitionCost:', metrics.customerAcquisitionCost);
-    console.log('tickets:', metrics.tickets);
-    console.log('revenue:', metrics.revenue);
-    console.log('operationalExpenses:', metrics.operationalExpenses);
-    console.log('yadinExpenses:', metrics.yadinExpenses);
-    console.log('opEx:', metrics.opEx);
-    
     await sql`
         INSERT INTO metrics (
             total_marketing_spend,
@@ -139,18 +112,18 @@ export async function updateMetrics(metrics: Metrics): Promise<void> {
             total_ads_count,
             opex
         ) VALUES (
-            ${safeGetValue(metrics.totalMarketingSpend)},
-            ${safeGetValue(metrics.influencerSpend)},
-            ${safeGetValue(metrics.paidAdsSpend)},
-            ${safeGetValue(metrics.netRevenue)},
-            ${safeGetValue(metrics.revenueSpentOnAds)},
-            ${safeGetValue(metrics.customerLifetimeValue)},
-            ${safeGetValue(metrics.customerAcquisitionCost)},
-            ${safeGetValue(metrics.tickets)},
-            ${safeGetValue(metrics.revenue)},
-            ${safeGetValue(metrics.operationalExpenses)},
-            ${safeGetValue(metrics.yadinExpenses)},
-            ${safeGetValue(metrics.opEx)}
+            ${metrics.totalMarketingSpend?.value || 0},
+            ${metrics.influencerSpend?.value || 0},
+            ${metrics.paidAdsSpend?.value || 0},
+            ${metrics.netRevenue?.value || 0},
+            ${metrics.revenueSpentOnAds?.value || 0},
+            ${metrics.customerLifetimeValue?.value || 0},
+            ${metrics.customerAcquisitionCost?.value || 0},
+            ${metrics.tickets?.value || 0},
+            ${metrics.revenue?.value || 0},
+            ${metrics.operationalExpenses?.value || 0},
+            ${metrics.yadinExpenses?.value || 0},
+            ${metrics.opEx?.value || 0}
         )
         ON CONFLICT (tickets, revenue) DO UPDATE SET
             total_marketing_spend = EXCLUDED.total_marketing_spend,
