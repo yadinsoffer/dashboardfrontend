@@ -98,7 +98,7 @@ export async function updateMetrics(metrics: Metrics): Promise<void> {
     console.log('Updating metrics with:', JSON.stringify(metrics, null, 2));
     
     // Add defensive checks to identify which property might be undefined
-    const safeGetValue = (prop: any, defaultVal: number = 0) => {
+    const safeGetValue = (prop: { value?: number } | undefined, defaultVal: number = 0): number => {
         if (!prop) {
             console.log('Warning: Property is undefined');
             return defaultVal;
