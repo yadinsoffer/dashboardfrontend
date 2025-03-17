@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS metrics (
     customer_acquisition_cost DECIMAL,
     tickets INTEGER,
     revenue DECIMAL,
-    operational_expenses DECIMAL
+    operational_expenses DECIMAL,
+    total_ads_count INTEGER
 );
 
 -- Create daily_metrics table for time series data

@@ -17,6 +17,7 @@ export interface Metrics {
   revenue: MetricValue;
   operationalExpenses: MetricValue;
   yadinExpenses: MetricValue;
+  opEx: MetricValue;
 }
 
 export interface ChartDataPoint {

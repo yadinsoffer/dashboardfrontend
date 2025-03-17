@@ -73,6 +73,11 @@ export async function getLatestMetrics(): Promise<DashboardData> {
                 value: Number(metrics.total_ads_count) || 0,
                 label: 'Yadin Expenses',
                 prefix: '$'
+            },
+            opEx: {
+                value: Number(metrics.opex) || 0,
+                label: 'OpEx',
+                prefix: '$'
             }
         },
         charts: {
@@ -100,7 +105,9 @@ export async function updateMetrics(metrics: Metrics): Promise<void> {
             customer_acquisition_cost,
             tickets,
             revenue,
-            operational_expenses
+            operational_expenses,
+            total_ads_count,
+            opex
         ) VALUES (
             ${metrics.totalMarketingSpend.value},
             ${metrics.influencerSpend.value},
@@ -111,7 +118,9 @@ export async function updateMetrics(metrics: Metrics): Promise<void> {
             ${metrics.customerAcquisitionCost.value},
             ${metrics.tickets.value},
             ${metrics.revenue.value},
-            ${metrics.operationalExpenses.value}
+            ${metrics.operationalExpenses.value},
+            ${metrics.yadinExpenses.value},
+            ${metrics.opEx.value}
         )
     `;
 }
